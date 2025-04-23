@@ -9,6 +9,9 @@ def inicializar_bd():
     Inicializa la base de datos y crea la tabla de mensajes si no existe.
     """
     try:
+        # Registrar adaptador para objetos datetime
+        sqlite3.register_adapter(datetime.datetime, lambda dt: dt.isoformat())
+        
         # Conectar a la base de datos (se creará si no existe)
         conexion = sqlite3.connect('chat.db')
         cursor = conexion.cursor()
